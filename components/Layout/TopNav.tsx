@@ -67,28 +67,6 @@ const Header = ({ isErrorPage }: HeaderType) => {
         </nav>
 
         <div className="site-header__actions">
-          <button
-            ref={searchRef}
-            className={`search-form-wrapper ${
-              searchOpen ? "search-form--active" : ""
-            }`}
-          >
-            <form className={`search-form`}>
-              <i
-                className="icon-cancel"
-                onClick={() => setSearchOpen(!searchOpen)}
-              ></i>
-              <input
-                type="text"
-                name="search"
-                placeholder="Enter the product you are looking for"
-              />
-            </form>
-            <i
-              onClick={() => setSearchOpen(!searchOpen)}
-              className="icon-search"
-            ></i>
-          </button>
           <Link href="/cart">
             <button className="btn-cart">
               <i className="icon-cart"></i>
@@ -97,7 +75,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
               )}
             </button>
           </Link>
-          <Link href="/login">
+          <Link href="/sign-in">
             <button className="site-header__btn-avatar">
               <i className="icon-avatar"></i>
             </button>
