@@ -6,7 +6,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    container: {
+    "tw-container": {
       center: true,
       padding: "2rem",
       screens: {

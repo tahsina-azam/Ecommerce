@@ -21,7 +21,7 @@ export default function LoginPageContainer() {
 
 function LoginPage() {
   return (
-    <div className="container flex h-screen w-screen flex-col items-center justify-center">
+    <div className="tw-container flex h-screen w-screen flex-col items-center justify-center">
       <Link href="/" className="absolute left-4 top-4 md:left-8 md:top-8">
         <div className="flex justify-center items-center">
           <Icons.chevronLeft className="mr-2 h-4 w-4" />
