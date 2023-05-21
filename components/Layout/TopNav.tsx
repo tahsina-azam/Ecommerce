@@ -1,6 +1,8 @@
+import { useToggleCartModalOpen } from "@/hooks/useCart";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import CartModal from "../cart/CartModal";
 
 type HeaderType = {
   isErrorPage?: Boolean;
@@ -17,9 +19,10 @@ const Header = ({ isErrorPage }: HeaderType) => {
     !arrayPaths.includes(router.pathname) || isErrorPage ? false : true
   );
   const [menuOpen, setMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+
   const navRef = useRef(null);
-  const searchRef = useRef(null);
+
+  const toggleCartModal = useToggleCartModalOpen();
 
   const headerClass = () => {
     if (window.pageYOffset === 0) {
@@ -40,14 +43,6 @@ const Header = ({ isErrorPage }: HeaderType) => {
     };
   }, []);
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
-  const closeSearch = () => {
-    setSearchOpen(false);
-  };
-
   return (
     <header className={`site-header ${!onTop ? "site-header--fixed" : ""}`}>
       <div className="container">
@@ -67,14 +62,14 @@ const Header = ({ isErrorPage }: HeaderType) => {
         </nav>
 
         <div className="site-header__actions">
-          <Link href="/cart">
+          <div onClick={toggleCartModal}>
             <button className="btn-cart">
               <i className="icon-cart"></i>
               {cartItems.length > 0 && (
                 <span className="btn-cart__count">{cartItems.length}</span>
               )}
             </button>
-          </Link>
+          </div>
           <Link href="/sign-in">
             <button className="site-header__btn-avatar">
               <i className="icon-avatar"></i>
@@ -90,6 +85,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
           </button>
         </div>
       </div>
+      <CartModal />
     </header>
   );
 };

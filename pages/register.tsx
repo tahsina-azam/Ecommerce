@@ -1,7 +1,6 @@
+import LottieAnimation from "@/components/LottieAnimation";
 import UserRegistrationForm from "@/components/forms/UserRegistrationForm";
 import { Icons } from "@/components/icons";
-// import animationData from "@/lib/lotties/buy-and-sell-online.json";
-// import { defaultOptions } from "@/lib/lotties/options";
 import Link from "next/link";
 // import Lottie from "react-lottie";
 
@@ -9,8 +8,6 @@ export const metadata = {
   title: "Create an account",
   description: "Create an account to get started.",
 };
-
-// const options = defaultOptions(animationData);
 
 export default function RegisterPage() {
   return (
@@ -25,8 +22,7 @@ export default function RegisterPage() {
         </div>
       </Link>
       <div className="hidden h-full bg-slate-50 lg:flex w-full flex-col justify-center items-center">
-        {/* TODO: un-comment */}
-        {/* <Lottie options={options} height={400} width={800} /> */}
+        <LottieAnimation type="buy-and-sell-online" height={400} width={800} />
       </div>
       <div className="lg:p-8">
         <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
