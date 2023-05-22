@@ -1,3 +1,4 @@
+import { useAddToCart } from "@/hooks/useCartStore";
 import { ProductTypeList } from "@/utils/types";
 import Link from "next/link";
 
@@ -10,6 +11,7 @@ const ProductItem = ({
   price,
   currentPrice,
 }: ProductTypeList) => {
+  const addToCart = useAddToCart();
   return (
     <div className="product-item">
       <div className="product__image">
@@ -34,14 +36,16 @@ const ProductItem = ({
       <div className="flex space-x-4 mt-2 mb-6 text-sm font-medium">
         <div className="flex-auto flex space-x-4">
           <button
-            className="h-8 px-1 font-semibold rounded-md bg-black text-white"
-            type="submit"
-          >
-            Buy now
-          </button>
-          <button
-            className="h-8 px-1 font-semibold rounded-md border border-slate-200 text-slate-900"
+            className="h-8 px-4 font-semibold rounded-md bg-black text-white"
             type="button"
+            onClick={() =>
+              addToCart({
+                price: currentPrice as number,
+                id,
+                name,
+                image: images[0] as string,
+              })
+            }
           >
             Add to cart
           </button>
