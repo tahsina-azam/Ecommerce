@@ -1,4 +1,4 @@
-import { useCartModal } from "@/hooks/useCart";
+import { useCartModal } from "@/hooks/useCartModal";
 import { Drawer } from "@mantine/core";
 import ModalContent from "./ModalContent";
 

@@ -1,15 +1,18 @@
-import products from "@/utils/data/products";
+import { useCartItems } from "@/hooks/useCartStore";
 import { ComponentPropsWithoutRef } from "react";
 import LottieAnimation from "../LottieAnimation";
 import { TAKA } from "../products/product-item";
 import CartItem from "./CartItem";
 
-const cartItems = products.slice(0, 3);
 const ModalContent = () => {
+  const cartItems = useCartItems();
+
+  console.log({ cartItems });
+
   const priceTotal = () => {
     let totalPrice = 0;
     if (cartItems.length > 0) {
-      cartItems.map((item) => (totalPrice += item.price * 2));
+      cartItems.map((item) => (totalPrice += item.quantity * item.price));
     }
 
     return totalPrice;
@@ -24,8 +27,7 @@ const ModalContent = () => {
         </div>
 
         <div className="">
-          {/* TODO: Reverse logic */}
-          {cartItems.length < 0 && (
+          {cartItems.length > 0 && (
             <table>
               <thead className="w-full">
                 <tr>
@@ -38,24 +40,24 @@ const ModalContent = () => {
               <tbody className="w-full">
                 {cartItems.map((item) => (
                   <CartItem
-                    thumb={item.images[0]}
+                    thumb={item.image}
                     key={item.id}
                     id={item.id}
                     name={item.name}
                     price={item.price}
-                    count={2}
+                    count={item.quantity}
                   />
                 ))}
               </tbody>
             </table>
           )}
-          {/* TODO: Reverse logic */}
-          {cartItems.length && (
+
+          {!cartItems.length && (
             <LottieAnimation type="empty-cart" height={310} width={700} />
           )}
         </div>
-        {/* TODO: Reverse logic */}
-        {cartItems.length < 0 && (
+
+        {cartItems.length > 0 && (
           <div className="pt-2 text-lg text-black dark:text-white flex flex-col justify-end h-[50vh]">
             <div className="mb-2 flex items-center justify-between border-t border-gray-200">
               <p>Subtotal</p>

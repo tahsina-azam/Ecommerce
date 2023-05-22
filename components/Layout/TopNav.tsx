@@ -1,4 +1,5 @@
-import { useToggleCartModalOpen } from "@/hooks/useCart";
+import { useToggleCartModalOpen } from "@/hooks/useCartModal";
+import { useCartSize } from "@/hooks/useCartStore";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -8,9 +9,6 @@ type HeaderType = {
   isErrorPage?: Boolean;
 };
 
-const cartItems = {
-  length: 1,
-};
 const arrayPaths = ["/"];
 const Header = ({ isErrorPage }: HeaderType) => {
   const router = useRouter();
@@ -19,6 +17,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
     !arrayPaths.includes(router.pathname) || isErrorPage ? false : true
   );
   const [menuOpen, setMenuOpen] = useState(false);
+  const cartSize = useCartSize();
 
   const navRef = useRef(null);
 
@@ -65,8 +64,8 @@ const Header = ({ isErrorPage }: HeaderType) => {
           <div onClick={toggleCartModal}>
             <button className="btn-cart">
               <i className="icon-cart"></i>
-              {cartItems.length > 0 && (
-                <span className="btn-cart__count">{cartItems.length}</span>
+              {cartSize > 0 && (
+                <span className="btn-cart__count">{cartSize}</span>
               )}
             </button>
           </div>

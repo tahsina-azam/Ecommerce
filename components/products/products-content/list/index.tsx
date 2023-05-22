@@ -17,6 +17,7 @@ const fetcher = (url: string[]) => {
 const ProductsContent = () => {
   const router = useRouter();
   const filter = router.query.filter as string;
+
   console.log({ filter });
   const { data, error } = useSwr(["/api/products", filter], fetcher, {
     revalidateIfStale: false,
