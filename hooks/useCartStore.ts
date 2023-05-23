@@ -38,9 +38,6 @@ const useCartStore = create<CartState>()(
             );
             return { cartItems: updatedItems };
           }
-          console.log({
-            product,
-          });
 
           // Item doesn't exist in cart, add it to the cart
           return {

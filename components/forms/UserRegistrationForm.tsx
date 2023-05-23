@@ -51,8 +51,6 @@ const UserRegistrationForm = () => {
   const handleSubmit = async (values: UserRegistrationFormValues) => {
     setLoading(true);
 
-    console.log({ values });
-
     try {
       var response = await axios.post("/auth/register", values);
       const data: RegistrationResponseData = response.data;

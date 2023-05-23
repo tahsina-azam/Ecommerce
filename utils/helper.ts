@@ -52,8 +52,6 @@ export const createTransaction = async ({
     },
   });
 
-  console.log("Success");
-
   //create transaction
   const trx = await db.transaction.create({
     data: {

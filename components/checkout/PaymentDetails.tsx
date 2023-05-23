@@ -52,8 +52,6 @@ const PaymentDetails = ({
   const handleSubmit = async (values: OrderData) => {
     setLoading(true);
 
-    console.log({ values });
-
     try {
       var response = await axios.post("/order", {
         ...values,

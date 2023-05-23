@@ -10,10 +10,6 @@ function Checkout() {
   const user = useCurrentUser();
   const isAuthenticated = useAuth();
 
-  console.log({ user });
-
-  console.log({ cartItems });
-
   const priceTotal = useMemo(() => {
     let totalPrice = 0;
     if (cartItems.length > 0) {
