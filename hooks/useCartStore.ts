@@ -89,3 +89,4 @@ export const useRemoveFromCart = () =>
 export const useRemove1FromCart = () =>
   useCartStore((state) => state.delete1FromCart);
 export const useClearCart = () => useCartStore((state) => state.clearCart);
+
