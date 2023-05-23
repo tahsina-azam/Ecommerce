@@ -1,4 +1,10 @@
+import {
+  useAddToCart,
+  useRemove1FromCart,
+  useRemoveFromCart,
+} from "@/hooks/useCartStore";
 import { ProductStoreType } from "@/utils/types";
+import { TAKA } from "../products/product-item";
 
 const CartItem = ({
   name,
@@ -7,23 +13,9 @@ const CartItem = ({
   count,
   price,
 }: Pick<ProductStoreType, "name" | "id" | "thumb" | "count" | "price">) => {
-  const removeFromCart = () => {};
-
-  const setProductCount = (count: number) => {
-    if (count <= 0) {
-      return;
-    }
-
-    const payload = {
-      product: {
-        name,
-        id,
-        count,
-        price,
-      },
-      count,
-    };
-  };
+  const addToCart = useAddToCart();
+  const removeFromCart = useRemoveFromCart();
+  const deleteFromCart = useRemove1FromCart();
 
   return (
     <tr className="my-8">
@@ -44,7 +36,7 @@ const CartItem = ({
         <div className="quantity-button w-full">
           <button
             type="button"
-            onClick={() => setProductCount(count - 1)}
+            onClick={() => deleteFromCart(id)}
             className="quantity-button__btn"
           >
             -
@@ -52,16 +44,24 @@ const CartItem = ({
           <span>{count}</span>
           <button
             type="button"
-            onClick={() => setProductCount(count + 1)}
+            onClick={() =>
+              addToCart({ id, name, price, image: thumb, quantity: 1 })
+            }
             className="quantity-button__btn"
           >
             +
           </button>
         </div>
       </td>
-      <td>${price}</td>
+      <td>
+        {TAKA}
+        {price}
+      </td>
       <td className="cart-item-cancel pl-12">
-        <i className="icon-cancel" onClick={() => removeFromCart()}></i>
+        <i
+          className="icon-cancel cursor-pointer"
+          onClick={() => removeFromCart(id)}
+        ></i>
       </td>
     </tr>
   );

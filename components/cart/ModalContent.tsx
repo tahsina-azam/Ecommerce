@@ -1,5 +1,6 @@
 import { useCartItems } from "@/hooks/useCartStore";
-import { ComponentPropsWithoutRef } from "react";
+import Link from "next/link";
+import { ComponentPropsWithoutRef, useMemo } from "react";
 import LottieAnimation from "../LottieAnimation";
 import { TAKA } from "../products/product-item";
 import CartItem from "./CartItem";
@@ -9,14 +10,19 @@ const ModalContent = () => {
 
   console.log({ cartItems });
 
-  const priceTotal = () => {
+  const priceTotal = useMemo(() => {
     let totalPrice = 0;
     if (cartItems.length > 0) {
       cartItems.map((item) => (totalPrice += item.quantity * item.price));
     }
 
     return totalPrice;
-  };
+  }, [cartItems]);
+
+  const taxes = useMemo(
+    () => Number((priceTotal * 0.07).toFixed(2)),
+    [priceTotal]
+  );
 
   return (
     <section className="cart flex h-full flex-col justify-between overflow-hidden">
@@ -61,20 +67,26 @@ const ModalContent = () => {
           <div className="pt-2 text-lg text-black dark:text-white flex flex-col justify-end h-[50vh]">
             <div className="mb-2 flex items-center justify-between border-t border-gray-200">
               <p>Subtotal</p>
-              <Price className="text-right" amount={250} />
+              <Price className="text-right" amount={priceTotal} />
             </div>
             <div className="mb-2 flex items-center justify-between">
               <p>Taxes</p>
-              <Price className="text-right" amount={250} />
+              <Price className="text-right" amount={taxes} />
             </div>
             <div className="mb-2 flex items-center justify-between border-b border-gray-200 pb-2">
               <p>Shipping</p>
-              <p className="text-right">{TAKA}150</p>
+              <p className="text-right text-sm">calculated at checkout</p>
             </div>
             <div className="mb-2 flex items-center justify-between font-bold">
               <p>Total</p>
-              <Price className="text-right" amount={250} />
+              <Price className="text-right" amount={priceTotal + taxes} />
             </div>
+            <Link
+              href="/checkout"
+              className="flex w-full items-center justify-center bg-black p-3 text-sm font-medium uppercase text-white opacity-90 hover:opacity-100 dark:bg-white dark:text-black rounded-md"
+            >
+              <span>Proceed to Checkout</span>
+            </Link>
           </div>
         )}
       </div>
