@@ -11,15 +11,18 @@ datasource db {
 }
 
 model User {
-  userId    String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  address   String
-  password  String
-  email     String   @unique
-  role      String   @default("user")
-  accountId String   @unique @map(name: "account_id") @db.ObjectId
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  bank      Bank     @relation(fields: [accountId], references: [accountId])
+  userId               String        @id @default(auto()) @map("_id") @db.ObjectId
+  name                 String
+  address              String
+  password             String
+  email                String        @unique
+  role                 String        @default("user")
+  accountId            String        @unique @map(name: "account_id") @db.ObjectId
+  createdAt            DateTime      @default(now()) @map(name: "created_at")
+  bank                 Bank          @relation(fields: [accountId], references: [accountId])
+  senderTransactions   Transaction[] @relation("TransactionSender")
+  receiverTransactions Transaction[] @relation("TransactionReceiver")
+  orders               Order[]
 }
 
 model Bank {
@@ -28,4 +31,29 @@ model Bank {
   createdAt DateTime @default(now()) @map(name: "created_at")
   deposit   Int      @default(50000)
   user      User?
+}
+
+model Transaction {
+  transactionId String   @id @default(auto()) @map("_id") @db.ObjectId
+  senderId      String   @map(name: "sender_id") @db.ObjectId
+  receiverId    String   @map(name: "receiver_id") @db.ObjectId
+  amount        Int
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  sender        User     @relation("TransactionSender", fields: [senderId], references: [userId])
+  receiver      User     @relation("TransactionReceiver", fields: [receiverId], references: [userId])
+  status        String   @default("pending")
+  order         Order?
+}
+
+model Order {
+  orderId       String      @id @default(auto()) @map("_id") @db.ObjectId
+  customerId    String      @map(name: "customer_id") @db.ObjectId
+  products      Json        @map(name: "product_id")
+  amount        Int
+  createdAt     DateTime    @default(now()) @map(name: "created_at")
+  user          User        @relation(fields: [customerId], references: [userId])
+  status        String      @default("pending")
+  address       String
+  transactionId String      @unique @map(name: "transaction_id") @db.ObjectId
+  transaction   Transaction @relation(fields: [transactionId], references: [transactionId])
 }

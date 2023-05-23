@@ -1,9 +1,12 @@
+import { useClearCart } from "@/hooks/useCartStore";
 import { axios } from "@/lib/axios";
 import { RegistrationResponseData } from "@/pages/api/auth/register";
 import { useForm } from "@mantine/form";
-import { User } from "global";
+import { CartItem, User } from "global";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Button } from "../Button";
 import { TAKA } from "../products/product-item";
 
 export type OrderData = {
@@ -16,9 +19,11 @@ export type OrderData = {
 const PaymentDetails = ({
   totalPrice,
   user,
+  cartItems,
 }: {
   totalPrice: number;
   user: User;
+  cartItems: CartItem[];
 }) => {
   const form = useForm<OrderData>({
     initialValues: {
@@ -27,8 +32,22 @@ const PaymentDetails = ({
       accountId: "",
       accountSecret: "",
     },
+    validate: {
+      address: (value: string) =>
+        value.length >= 3
+          ? null
+          : "Address should be at least 3 characters long",
+      accountId: (value: string) =>
+        value.length == 24 ? null : "Account Id should be 24 characters long",
+      accountSecret: (value: string) =>
+        value.length >= 4
+          ? null
+          : "Account Secret should be at least 24 characters long",
+    },
   });
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const clearCart = useClearCart();
 
   const handleSubmit = async (values: OrderData) => {
     setLoading(true);
@@ -36,10 +55,15 @@ const PaymentDetails = ({
     console.log({ values });
 
     try {
-      var response = await axios.post("/order", values);
+      var response = await axios.post("/order", {
+        ...values,
+        cartItems,
+        totalPrice,
+      });
       const data: RegistrationResponseData = response.data;
       toast.success(data.message);
-      //   router.push("/sign-in");
+      clearCart();
+      router.push(`/user/${user.userId}`);
     } catch (error: any) {
       if (error.response.status == 500) {
         setLoading(false);
@@ -204,12 +228,13 @@ const PaymentDetails = ({
           </p>
         </div>
       </div>
-      <button
-        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+      <Button
+        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-2 font-medium text-white hover:bg-gray-800"
         type="submit"
+        loading={loading}
       >
         Place Order
-      </button>
+      </Button>
     </form>
   );
 };

@@ -70,7 +70,7 @@ const useCartStore = create<CartState>()(
         });
       },
       clearCart: () => {
-        set({ cartItems: [] });
+        set({ cartItems: [], cartSize: 0 });
       },
     }),
     {
@@ -91,3 +91,4 @@ export const useRemoveFromCart = () =>
   useCartStore((state) => state.removeFromCart);
 export const useRemove1FromCart = () =>
   useCartStore((state) => state.delete1FromCart);
+export const useClearCart = () => useCartStore((state) => state.clearCart);

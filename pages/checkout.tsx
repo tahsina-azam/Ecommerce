@@ -46,7 +46,11 @@ function Checkout() {
       <CheckoutHeader />
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
         <OrderSummary cartItems={cartItems} />
-        <PaymentDetails totalPrice={priceTotal + taxes} user={user} />
+        <PaymentDetails
+          totalPrice={priceTotal + taxes}
+          user={user}
+          cartItems={cartItems}
+        />
       </div>
     </div>
   );

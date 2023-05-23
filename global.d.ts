@@ -4,6 +4,7 @@ declare module "global" {
     email: string;
     role: string;
     address: string;
+    userId: string;
   };
   export type CartItem = {
     id: string;

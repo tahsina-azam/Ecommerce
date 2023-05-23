@@ -1,10 +1,19 @@
+import { CartItem } from "global";
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { OrderData } from "@/components/checkout/PaymentDetails";
 import { db } from "@/lib/db";
+import { createTransaction, makeOrder } from "@/utils/helper";
+import { Order } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+type Body = {
+  cartItems: CartItem[];
+  totalPrice: number;
+} & OrderData;
 export type OrderResponseData = {
   message: string;
+  error?: any;
+  order?: Order | null;
 };
 
 export default async function handler(
@@ -16,7 +25,8 @@ export default async function handler(
   if (method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
   }
-  const { email, accountId, accountSecret, address } = req.body as OrderData;
+  const { email, accountId, accountSecret, address, cartItems, totalPrice } =
+    req.body as Body;
 
   const user = await db.user.findUnique({
     where: {
@@ -47,26 +57,31 @@ export default async function handler(
     return res.status(401).json({ message: "Account secret doesn't match" });
   }
 
-  //   const newUser = await db.user.create({
-  //     data: {
-
-  //       email,
-
-  //       role: "user",
-  //       address,
-  //       bank: {
-  //         connect: {
-  //           accountId,
-  //         },
-  //       },
-  //     },
-  //   });
-
-  //   if (!newUser) {
-  //     return res.status(401).json({ message: "Registration failed" });
-  //   }
+  try {
+    const transaction = await createTransaction({
+      accountId,
+      amount: totalPrice,
+    });
+    if (!transaction) {
+      return res.status(401).json({ message: "Transaction failed" });
+    }
+    var order = await makeOrder({
+      userId: user.userId as string,
+      address,
+      products: cartItems,
+      totalPrice,
+      trxId: transaction.transactionId,
+    });
+    if (!order) {
+      return res.status(401).json({ message: "Order failed" });
+    }
+  } catch (error) {
+    console.log({ error });
+    return res.status(401).json({ message: "Transaction failed", error });
+  }
 
   return res.status(200).json({
-    message: "User registered successfully",
+    message: "Order successfully created",
+    order,
   });
 }
