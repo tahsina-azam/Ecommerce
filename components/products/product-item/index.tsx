@@ -44,6 +44,7 @@ const ProductItem = ({
                 id,
                 name,
                 image: images[0] as string,
+                quantity: 1,
               })
             }
           >
