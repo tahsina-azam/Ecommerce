@@ -13,6 +13,7 @@ const initialUserData: User = {
   name: "",
   email: "",
   role: "",
+  address: "",
 };
 
 const useCurrentUserStore = create<UserStore>()(

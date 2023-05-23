@@ -8,8 +8,6 @@ import CartItem from "./CartItem";
 const ModalContent = () => {
   const cartItems = useCartItems();
 
-  console.log({ cartItems });
-
   const priceTotal = useMemo(() => {
     let totalPrice = 0;
     if (cartItems.length > 0) {
@@ -29,7 +27,6 @@ const ModalContent = () => {
       <div>
         <div className="cart__intro">
           <h3 className="cart__title">Shopping Cart</h3>
-          {/* <CheckoutStatus step="cart" /> */}
         </div>
 
         <div className="">

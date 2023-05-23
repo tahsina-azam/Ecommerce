@@ -38,9 +38,6 @@ const useCartStore = create<CartState>()(
             );
             return { cartItems: updatedItems };
           }
-          console.log({
-            product,
-          });
 
           // Item doesn't exist in cart, add it to the cart
           return {
@@ -70,7 +67,7 @@ const useCartStore = create<CartState>()(
         });
       },
       clearCart: () => {
-        set({ cartItems: [] });
+        set({ cartItems: [], cartSize: 0 });
       },
     }),
     {
@@ -91,3 +88,5 @@ export const useRemoveFromCart = () =>
   useCartStore((state) => state.removeFromCart);
 export const useRemove1FromCart = () =>
   useCartStore((state) => state.delete1FromCart);
+export const useClearCart = () => useCartStore((state) => state.clearCart);
+

@@ -5,10 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(req);
   const response = await axios.get("https://fakestoreapi.com/products");
   const products = response.data;
-  console.log(products);
 
   // fake loading time
   setTimeout(() => {

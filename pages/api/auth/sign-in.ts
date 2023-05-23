@@ -44,6 +44,8 @@ export default async function handler(
       name: user.name,
       email: user.email,
       role: user.role,
+      address: user.address,
+      userId: user.userId,
     },
   });
 }

@@ -44,6 +44,8 @@ const ProductItem = ({
                 id,
                 name,
                 image: images[0] as string,
+                quantity: 1,
+
               })
             }
           >
@@ -66,7 +68,6 @@ const ProductItem = ({
       </div>
     </div>
   );
-  // return <NewProductCard />;
 };
 
 export default ProductItem;
