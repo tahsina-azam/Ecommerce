@@ -1,4 +1,4 @@
-import { CartItem } from "global";
+import { CartItem } from "@/global";
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { OrderData } from "@/components/checkout/PaymentDetails";
 import { db } from "@/lib/db";

@@ -1,4 +1,4 @@
-import { User } from "global";
+import { User } from "@/global";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -14,6 +14,7 @@ const initialUserData: User = {
   email: "",
   role: "",
   address: "",
+  userId: "",
 };
 
 const useCurrentUserStore = create<UserStore>()(

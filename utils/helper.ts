@@ -1,5 +1,5 @@
+import { CartItem } from "@/global";
 import { db } from "@/lib/db";
-import { CartItem } from "global";
 
 export const createTransaction = async ({
   accountId,

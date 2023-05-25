@@ -1,8 +1,8 @@
+import { CartItem, User } from "@/global";
 import { useClearCart } from "@/hooks/useCartStore";
 import { axios } from "@/lib/axios";
 import { RegistrationResponseData } from "@/pages/api/auth/register";
 import { useForm } from "@mantine/form";
-import { CartItem, User } from "global";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { toast } from "react-hot-toast";

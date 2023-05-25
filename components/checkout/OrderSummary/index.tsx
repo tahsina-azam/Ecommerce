@@ -1,4 +1,4 @@
-import { CartItem } from "global";
+import { CartItem } from "@/global";
 import ProductSummaryCard from "./ProductSummaryCard";
 import ShippingMethod from "./ShippingMethod";
 

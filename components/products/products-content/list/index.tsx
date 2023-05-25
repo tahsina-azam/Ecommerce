@@ -1,26 +1,10 @@
+import { useProduct } from "@/hooks/useProduct";
 import { ProductTypeList } from "@/utils/types";
-import { useRouter } from "next/router";
-import useSwr from "swr";
 import ProductItem from "../../product-item";
 import ProductsLoading from "./loading";
 
-const fetcher = (url: string[]) => {
-  const data = fetch(url[0]).then((res) => res.json());
-  if (url[1]) {
-    return data.then((res) =>
-      res.filter((item: ProductTypeList) => item.type === url[1])
-    );
-  }
-
-  return data;
-};
 const ProductsContent = () => {
-  const router = useRouter();
-  const filter = router.query.filter as string;
-
-  const { data, error } = useSwr(["/api/products", filter], fetcher, {
-    revalidateIfStale: false,
-  });
+  const { data, error } = useProduct();
 
   if (error) return <div>Failed to load users</div>;
   return (
