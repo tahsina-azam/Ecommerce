@@ -1,13 +1,18 @@
-const Breadcrumb = () => (
+import Link from "next/link";
+
+const Breadcrumb = ({ path = "All Products" }: { path?: string }) => (
   <section className="breadcrumb">
     <div className="container">
       <ul className="breadcrumb-list">
-        <li><a href="#"><i className="icon-home"></i></a></li>
-        <li>All Products</li>
+        <li>
+          <Link href="/">
+            <i className="icon-home"></i>
+          </Link>
+        </li>
+        <li>{path}</li>
       </ul>
     </div>
   </section>
 );
 
-
-export default Breadcrumb
+export default Breadcrumb;

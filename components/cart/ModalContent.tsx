@@ -1,8 +1,8 @@
 import { useCartItems } from "@/hooks/useCartStore";
 import Link from "next/link";
-import { ComponentPropsWithoutRef, useMemo } from "react";
+import { useMemo } from "react";
 import LottieAnimation from "../LottieAnimation";
-import { TAKA } from "../products/product-item";
+import Price from "../Price";
 import CartItem from "./CartItem";
 
 const ModalContent = () => {
@@ -88,18 +88,6 @@ const ModalContent = () => {
         )}
       </div>
     </section>
-  );
-};
-
-const Price = ({
-  amount,
-}: ComponentPropsWithoutRef<"div"> & {
-  amount: number;
-}) => {
-  return (
-    <div>
-      {TAKA} {amount}
-    </div>
   );
 };
 

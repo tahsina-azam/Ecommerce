@@ -20,3 +20,11 @@ export type OrderData = Order & {
     name: string;
   };
 };
+
+export type ProductType = {
+  price: number;
+  id: string;
+  name: string;
+  image: string;
+  quantity: number;
+};

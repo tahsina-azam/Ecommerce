@@ -1,8 +1,9 @@
 import { useCartModal } from "@/hooks/useCartModal";
 import { Drawer } from "@mantine/core";
+import { PropsWithChildren } from "react";
 import ModalContent from "./ModalContent";
 
-export default function CartModal() {
+export default function CartModal({ children }: PropsWithChildren) {
   const [opened, toggle] = useCartModal();
 
   return (
@@ -20,7 +21,7 @@ export default function CartModal() {
           timingFunction: "linear",
         }}
       >
-        <ModalContent />
+        {children ? children : <ModalContent />}
       </Drawer>
     </>
   );
