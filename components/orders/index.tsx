@@ -1,4 +1,5 @@
 import { OrderData, ProductType } from "@/global";
+import { axios } from "@/lib/axios";
 import { Badge, Group, Select, Table, Text } from "@mantine/core";
 import { useMemo, useState } from "react";
 import { Button } from "../Button";
@@ -21,12 +22,34 @@ export type OrderStatus = (typeof statusData)[number];
 
 export default function OrderTable({ data }: OrderTableProps) {
   const [selected, setSelected] = useState<OrderData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const close = () => {
     setSelected(null);
   };
 
   console.log({ selected });
+
+  const handleOrderStatusChange = async (
+    status: OrderStatus,
+    transactionId: string,
+    currentStatus: OrderStatus
+  ) => {
+    if (status === "pending") return;
+    if (status === currentStatus) return;
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.patch(`/order/change-status`, {
+        status,
+        transactionId,
+      });
+
+      console.log({ response });
+    } catch (error) {}
+    setIsLoading(false);
+  };
 
   const rows = useMemo(
     () =>
@@ -36,9 +59,17 @@ export default function OrderTable({ data }: OrderTableProps) {
           <td>
             <Select
               size="xs"
-              data={statusData}
+              data={statusData.slice(0, 3)}
               defaultValue={item.status}
               variant="unstyled"
+              disabled={isLoading}
+              onChange={(status) =>
+                handleOrderStatusChange(
+                  status as OrderStatus,
+                  item.transactionId,
+                  item.status as OrderStatus
+                )
+              }
             />
           </td>
           <td>

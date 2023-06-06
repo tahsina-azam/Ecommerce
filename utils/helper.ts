@@ -4,22 +4,22 @@ import { db } from "@/lib/db";
 export const createTransaction = async ({
   accountId,
   amount,
+  receiverId,
+  receiverUserId,
 }: {
   accountId: string;
   amount: number;
+  receiverId: string;
+  receiverUserId: string;
 }) => {
-  const admin = await db.user.findFirst({
-    where: {
-      role: "admin",
-    },
-    select: {
-      userId: true,
-      accountId: true,
-    },
-  });
-  if (!admin) throw new Error("Admin not found");
-
   //decrement deposit from user
+
+  console.log({
+    accountId,
+    amount,
+    receiverId,
+    receiverUserId,
+  });
   const user = await db.bank.update({
     where: {
       accountId,
@@ -43,7 +43,7 @@ export const createTransaction = async ({
   //increment deposit to admin
   await db.bank.update({
     where: {
-      accountId: admin.accountId,
+      accountId: receiverId,
     },
     data: {
       deposit: {
@@ -63,7 +63,7 @@ export const createTransaction = async ({
       },
       receiver: {
         connect: {
-          userId: admin.userId,
+          userId: receiverUserId,
         },
       },
     },

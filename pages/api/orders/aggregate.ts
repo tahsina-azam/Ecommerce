@@ -8,9 +8,10 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export type AggregateResponseData = {
   "Total Orders": number;
-  "Total Sum": string;
+  "Total Sales": string;
   "Total Products": number;
   "Total Users": number;
+  "Bank Deposit": string;
 };
 
 export default async function handler(
@@ -26,15 +27,29 @@ export default async function handler(
         },
       });
       const userCount = await db.user.count();
+      const admin = await db.user.findFirst({
+        where: {
+          role: "admin",
+        },
+      });
+
+      if (!admin) throw new Error(`Admin not found`);
+
+      const adminBankAccount = await db.bank.findFirst({
+        where: {
+          accountId: admin.accountId,
+        },
+      });
 
       const totalOrders = await db.order.count();
       const totalSum = orders._sum.amount || 0;
       const totalProducts = products.length;
       return res.status(200).json({
-        "Total Sum": `${TAKA}${totalSum || 0}`,
+        "Total Sales": `${TAKA}${totalSum || 0}`,
         "Total Users": userCount,
         "Total Products": totalProducts,
         "Total Orders": totalOrders,
+        "Bank Deposit": `${TAKA}${adminBankAccount?.deposit}`,
       });
     }
     default:
