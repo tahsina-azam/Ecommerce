@@ -1,41 +1,58 @@
-import Layout from "@/components/Layout";
-import OrderTable from "@/components/orders";
-import { useOrder } from "@/hooks/useOrder";
-import { Tabs } from "@mantine/core";
-import { useState } from "react";
+import AggregationCards from "@/components/AggregationCards";
+import { Overview } from "@/components/BarChart";
+import AdminLayout from "@/components/Layout/admin";
+import { RecentSales } from "@/components/RecentSales";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/tabs";
 
 type TabValue = "orders" | "users" | "transactions" | null;
 
 const Dashboard = () => {
-  const { data, isLoading } = useOrder({});
-  const [activeTab, setActiveTab] = useState<TabValue>("orders");
-
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (!data) return <h1>No data</h1>;
   return (
-    <Layout>
-      <div className="container">
-        <div className="w-full py-10">
-          <Tabs
-            value={activeTab}
-            onTabChange={(value: TabValue) => setActiveTab(value)}
-          >
-            <Tabs.List position="apart" grow className="mb-6">
-              <Tabs.Tab value="orders">Orders</Tabs.Tab>
-              <Tabs.Tab value="users">Users</Tabs.Tab>
-              <Tabs.Tab value="transactions">Transactions</Tabs.Tab>
-            </Tabs.List>
-            <Tabs.Panel value="orders">
-              {" "}
-              <OrderTable data={data} />
-            </Tabs.Panel>
-            <Tabs.Panel value="users">Second panel</Tabs.Panel>
-            <Tabs.Panel value="transactions">Second panel</Tabs.Panel>
-          </Tabs>
-        </div>
+    <AdminLayout>
+      <div className="container font-sans mt-16">
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <Tabs defaultValue="overview" className="space-y-4 pt-6">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="reports" disabled>
+              Reports
+            </TabsTrigger>
+            <TabsTrigger value="notifications" disabled>
+              Notifications
+            </TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="overview" className="space-y-4">
+            <AggregationCards />
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 pt-6">
+              <Card className="col-span-4">
+                <CardHeader>
+                  <CardTitle>Overview</CardTitle>
+                </CardHeader>
+                <CardContent className="pl-2">
+                  <Overview />
+                </CardContent>
+              </Card>
+              <Card className="col-span-3">
+                <CardHeader>
+                  <CardTitle>Recent Sales</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <RecentSales />
+                </CardContent>
+              </Card>
+            </div>
+          </TabsContent>
+          <TabsContent value="analytics" className="space-y-4">
+            <h2 className="container text-4xl font-bold tracking-tight mx-auto">
+              Analytics
+            </h2>
+          </TabsContent>
+        </Tabs>
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 

@@ -29,7 +29,7 @@ model Bank {
   accountId String   @id @default(auto()) @map("_id") @db.ObjectId
   secret    String
   createdAt DateTime @default(now()) @map(name: "created_at")
-  deposit   Int      @default(50000)
+  deposit   Float    @default(50000)
   user      User?
 }
 
@@ -37,7 +37,7 @@ model Transaction {
   transactionId String   @id @default(auto()) @map("_id") @db.ObjectId
   senderId      String   @map(name: "sender_id") @db.ObjectId
   receiverId    String   @map(name: "receiver_id") @db.ObjectId
-  amount        Int
+  amount        Float
   createdAt     DateTime @default(now()) @map(name: "created_at")
   sender        User     @relation("TransactionSender", fields: [senderId], references: [userId])
   receiver      User     @relation("TransactionReceiver", fields: [receiverId], references: [userId])
@@ -49,7 +49,7 @@ model Order {
   orderId       String      @id @default(auto()) @map("_id") @db.ObjectId
   customerId    String      @map(name: "customer_id") @db.ObjectId
   products      Json        @map(name: "product_id")
-  amount        Int
+  amount        Float
   createdAt     DateTime    @default(now()) @map(name: "created_at")
   user          User        @relation(fields: [customerId], references: [userId])
   status        String      @default("pending")
