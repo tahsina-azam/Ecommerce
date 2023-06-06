@@ -39,7 +39,7 @@ const UserLoginForm = () => {
       toast.success(data.message);
       router.push("/");
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message ?? "Something went wrong");
       clearCurrentUser();
     }
     setLoading(false);
