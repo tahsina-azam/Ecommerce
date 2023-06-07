@@ -1,7 +1,7 @@
 export const products = [
   {
     id: "1",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Summer Vibes",
     type: "men-clothing",
     price: 119.99,
     discount: 30,
@@ -10,7 +10,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-1.jpg"],
+    images: ["/images/products/shirt1.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -63,7 +63,7 @@ export const products = [
   },
   {
     id: "2",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Casual",
     type: "men-clothing",
     price: 119.99,
     quantityAvailable: 2,
@@ -71,7 +71,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-2.jpg"],
+    images: ["/images/products/shirt2.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -124,7 +124,7 @@ export const products = [
   },
   {
     id: "3",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Hawaii",
     type: "men-clothing",
     price: 119.99,
     quantityAvailable: 2,
@@ -132,7 +132,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-3.jpg"],
+    images: ["/images/products/shirt3.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -185,7 +185,7 @@ export const products = [
   },
   {
     id: "4",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Retro",
     type: "men-clothing",
     price: 119.99,
     quantityAvailable: 2,
@@ -193,7 +193,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-4.jpg"],
+    images: ["/images/products/shirt4.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -232,7 +232,7 @@ export const products = [
   },
   {
     id: "5",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Winter",
     type: "men-clothing",
     price: 119.99,
     quantityAvailable: 2,
@@ -240,7 +240,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-5.jpg"],
+    images: ["/images/products/shirt5.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -293,7 +293,7 @@ export const products = [
   },
   {
     id: "6",
-    name: "T-Shirt Summer Vibes",
+    name: "Shirt Layered",
     type: "men-clothing",
     price: 119.99,
     discount: 30,
@@ -302,7 +302,7 @@ export const products = [
     currentPrice: 250,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: ["/images/products/product-6.jpg"],
+    images: ["/images/products/shirt6.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -510,9 +510,7 @@ export const products = [
     currentPrice: 40000,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: [
-      "https://azse77seaprodsa.blob.core.windows.net/b2b-dr-pickaboocdn/media/catalog/product/cache/a452da278a89f00548b398f225b4466e/w/a/watch-9023.jpg",
-    ],
+    images: ["/images/products/watch1.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -551,7 +549,7 @@ export const products = [
   },
   {
     id: "11",
-    name: "Hugo Boss",
+    name: "Gucci",
     type: "fragrances",
     price: 4000,
     quantityAvailable: 2,
@@ -559,9 +557,7 @@ export const products = [
     currentPrice: 4000,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: [
-      "https://azse77seaprodsa.blob.core.windows.net/b2b-dr-pickaboocdn/media/catalog/product/cache/a452da278a89f00548b398f225b4466e/r/e/redhugo-1.jpg",
-    ],
+    images: ["/images/products/perfume1.jpg"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
@@ -600,7 +596,7 @@ export const products = [
   },
   {
     id: "12",
-    name: "Carolina Herrera",
+    name: "Mojave Ghost",
     type: "fragrances",
     price: 8000,
     quantityAvailable: 2,
@@ -608,9 +604,7 @@ export const products = [
     currentPrice: 8000,
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
-    images: [
-      "https://azse77seaprodsa.blob.core.windows.net/b2b-dr-pickaboocdn/media/catalog/product/cache/a452da278a89f00548b398f225b4466e/c/e/ceqxxws.jpg",
-    ],
+    images: ["/images/products/perfume2.png"],
     punctuation: {
       countOpinions: 81,
       punctuation: 4.5,
