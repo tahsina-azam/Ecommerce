@@ -58,9 +58,21 @@ export default async function handler(
   }
 
   try {
+    const admin = await db.user.findFirst({
+      where: {
+        role: "admin",
+      },
+      select: {
+        userId: true,
+        accountId: true,
+      },
+    });
+    if (!admin) throw new Error(`Admin not found`);
     const transaction = await createTransaction({
       accountId,
       amount: totalPrice,
+      receiverId: admin.accountId,
+      receiverUserId: admin.userId,
     });
     if (!transaction) {
       return res.status(401).json({ message: "Transaction failed" });
