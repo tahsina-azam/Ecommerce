@@ -5,7 +5,7 @@ function Footer() {
       <footer className="relative mt-20 bg-gray-900 px-4 pt-20">
         <div className="absolute -top-10 left-1/2 h-16 w-16 -translate-x-1/2 rounded-xl border-4 border-sky-500 bg-white p-2">
           <Image
-            src="/bulb.png"
+            src="/images/abstract-shape.png"
             width={50}
             height={50}
             alt="Picture of the author"
@@ -29,7 +29,7 @@ function Footer() {
           </a>
         </nav>
         <p className="py-10 text-center text-gray-300">
-          © 2022 Boleno | All Rights Reserved
+          © 2023 Shoppers | All Rights Reserved
         </p>
       </footer>
     </div>

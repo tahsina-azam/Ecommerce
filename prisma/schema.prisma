@@ -45,6 +45,7 @@ model Transaction {
   order         Order?
 }
 
+
 model Order {
   orderId       String      @id @default(auto()) @map("_id") @db.ObjectId
   customerId    String      @map(name: "customer_id") @db.ObjectId
@@ -57,3 +58,4 @@ model Order {
   transactionId String      @unique @map(name: "transaction_id") @db.ObjectId
   transaction   Transaction @relation(fields: [transactionId], references: [transactionId])
 }
+

@@ -12,7 +12,7 @@ function Hero() {
           >
             <span className="mr-2 text-4xl text-gray-800">
               <Image
-                src="/bulb.png"
+                src="/images/abstract-shape.png"
                 width={70}
                 height={70}
                 alt="Picture of the author"

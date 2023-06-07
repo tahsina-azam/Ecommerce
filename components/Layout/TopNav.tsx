@@ -1,5 +1,6 @@
 import { useToggleCartModalOpen } from "@/hooks/useCartModal";
 import { useCartSize } from "@/hooks/useCartStore";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -45,16 +46,25 @@ const Header = ({ isErrorPage }: HeaderType) => {
   return (
     <header className={`site-header ${!onTop ? "site-header--fixed" : ""}`}>
       <div className="container">
-        <Link href="/">
-          <h1 className="site-logo">Logo E-Shop</h1>
-        </Link>
+        <a
+          href="#"
+          className="flex items-center whitespace-nowrap text-2xl font-black"
+        >
+          <span className="mr-2 text-4xl text-gray-800">
+            <Image
+              src="/images/abstract-shape.png"
+              width={50}
+              height={50}
+              alt="Picture of the author"
+            />
+          </span>
+          Shoppers
+        </a>
         <nav
           ref={navRef}
           className={`site-nav ${menuOpen ? "site-nav--open" : ""}`}
         >
           <Link href="/products">Products</Link>
-          <a href="#">Inspiration</a>
-          <a href="#">Rooms</a>
           <button className="site-nav__btn">
             <p>Account</p>
           </button>
