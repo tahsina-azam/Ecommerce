@@ -1,6 +1,7 @@
 import { OrderData, ProductType } from "@/global";
 import { axios } from "@/lib/axios";
 import { Badge, Group, Select, Table, Text } from "@mantine/core";
+import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { Button } from "../Button";
 import { TAKA } from "../products/product-item";
@@ -23,6 +24,9 @@ export type OrderStatus = (typeof statusData)[number];
 export default function OrderTable({ data }: OrderTableProps) {
   const [selected, setSelected] = useState<OrderData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+
+  const isOnRetail = router.pathname.includes("/retail");
 
   const close = () => {
     setSelected(null);
@@ -59,7 +63,7 @@ export default function OrderTable({ data }: OrderTableProps) {
           <td>
             <Select
               size="xs"
-              data={statusData.slice(0, 3)}
+              data={!isOnRetail ? statusData.slice(0, 3) : statusData.slice(1)}
               defaultValue={item.status}
               variant="unstyled"
               disabled={isLoading}
@@ -95,7 +99,7 @@ export default function OrderTable({ data }: OrderTableProps) {
           </Badge>
         )}
       </td> */}
-          <td className="text-black/70">{item.transactionId}</td>
+          {/* <td className="text-black/70">{item.transactionId}</td> */}
           <td>
             <Badge fullWidth>{`${TAKA} ${item.amount}`}</Badge>
           </td>
@@ -117,7 +121,7 @@ export default function OrderTable({ data }: OrderTableProps) {
           <th>Status</th>
           <th>Customer</th>
           <th>Address</th>
-          <th>Transaction Id</th>
+          {/* <th>Transaction Id</th> */}
           <th>Amount</th>
           <th>Products</th>
         </tr>

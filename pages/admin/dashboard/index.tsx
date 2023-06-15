@@ -5,8 +5,6 @@ import { RecentSales } from "@/components/RecentSales";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/tabs";
 
-type TabValue = "orders" | "users" | "transactions" | null;
-
 const Dashboard = () => {
   return (
     <AdminLayout>

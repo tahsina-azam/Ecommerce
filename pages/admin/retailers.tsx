@@ -4,10 +4,10 @@ import { DashboardShell } from "@/components/shell";
 import UserTable from "@/components/users/UserTable";
 import { useUsers } from "@/hooks/useUsers";
 
-const Customers = () => {
+const Retailers = () => {
   const { data, isLoading } = useUsers();
 
-  const customers = data?.filter((user) => user.role === "user") ?? [];
+  const retailers = data?.filter((user) => user.role === "supplier") ?? [];
 
   if (isLoading) return <h1>Loading...</h1>;
 
@@ -15,11 +15,11 @@ const Customers = () => {
   return (
     <AdminLayout>
       <DashboardShell>
-        <DashboardHeader heading="Customers" text="Manage customers" />
-        <UserTable data={customers} />
+        <DashboardHeader heading="Retailers" text="Manage retailers" />
+        <UserTable data={retailers} />
       </DashboardShell>
     </AdminLayout>
   );
 };
 
-export default Customers;
+export default Retailers;

@@ -6,6 +6,11 @@ export type User = {
   role: string;
   address: string;
   userId: string;
+  accountId: string;
+  image: string;
+  bank: {
+    deposit: number;
+  };
 };
 export type CartItem = {
   id: string;

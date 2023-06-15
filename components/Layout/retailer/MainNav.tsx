@@ -14,31 +14,22 @@ export function MainNav({
       {...props}
     >
       <Link
-        href="/admin/orders"
+        href="/retailer/orders"
         className={cn(
           "text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
-          router.pathname === "/admin/orders" && "text-primary underline"
+          router.pathname === "/retailer/orders" && "text-primary underline"
         )}
       >
         Orders
       </Link>
       <Link
-        href="/admin/customers"
+        href="/retailer/products"
         className={cn(
           "text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
-          router.pathname === "/admin/customers" && "text-primary underline"
+          router.pathname === "/retailer/products" && "text-primary underline"
         )}
       >
-        Customers
-      </Link>
-      <Link
-        href="/admin/retailers"
-        className={cn(
-          "text-sm font-medium text-muted-foreground transition-colors hover:text-primary",
-          router.pathname === "/admin/retailers" && "text-primary underline"
-        )}
-      >
-        Retailers
+        Products
       </Link>
     </nav>
   );

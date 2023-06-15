@@ -1,5 +1,6 @@
 import { useToggleCartModalOpen } from "@/hooks/useCartModal";
 import { useCartSize } from "@/hooks/useCartStore";
+import { useClearCurrentUser } from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -13,6 +14,7 @@ type HeaderType = {
 const arrayPaths = ["/"];
 const Header = ({ isErrorPage }: HeaderType) => {
   const router = useRouter();
+  const handleSignOut = useClearCurrentUser();
 
   const [onTop, setOnTop] = useState(
     !arrayPaths.includes(router.pathname) || isErrorPage ? false : true
@@ -80,7 +82,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
             </button>
           </div>
           <Link href="/sign-in">
-            <button className="site-header__btn-avatar">
+            <button className="site-header__btn-avatar" onClick={handleSignOut}>
               <i className="icon-avatar"></i>
             </button>
           </Link>

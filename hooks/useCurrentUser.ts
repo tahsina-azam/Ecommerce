@@ -15,6 +15,11 @@ const initialUserData: User = {
   role: "",
   address: "",
   userId: "",
+  accountId: "",
+  image: "",
+  bank: {
+    deposit: 0,
+  },
 };
 
 const useCurrentUserStore = create<UserStore>()(

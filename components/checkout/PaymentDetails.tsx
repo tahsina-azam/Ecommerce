@@ -61,7 +61,7 @@ const PaymentDetails = ({
       const data: RegistrationResponseData = response.data;
       toast.success(data.message);
       clearCart();
-      router.push(`/user/${user.userId}`);
+      router.push(`/user/active-orders`);
     } catch (error: any) {
       if (error.response.status == 500) {
         setLoading(false);
