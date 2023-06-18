@@ -2,6 +2,7 @@ import { useOrder } from "@/hooks/useOrder";
 import { useMemo } from "react";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { TAKA } from "./products/product-item";
+import { Skeleton } from "./skeleton";
 
 const data = [
   {
@@ -81,28 +82,30 @@ export function Overview() {
     }, [] as { name: string; amount: number }[]);
   }, [data]);
 
-  if (isLoading) return <h1>Loading...</h1>;
-
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={formattedData}>
-        <XAxis
-          dataKey="name"
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-        />
+      {isLoading ? (
+        <Skeleton className="w-[483px] h-[350px]" />
+      ) : (
+        <BarChart data={formattedData}>
+          <XAxis
+            dataKey="name"
+            stroke="#888888"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+          />
 
-        <YAxis
-          stroke="#888888"
-          fontSize={12}
-          tickLine={false}
-          axisLine={false}
-          tickFormatter={(value) => `${TAKA}${value}`}
-        />
-        <Bar dataKey="amount" fill="#adfa1d" radius={[4, 4, 0, 0]} />
-      </BarChart>
+          <YAxis
+            stroke="#888888"
+            fontSize={12}
+            tickLine={false}
+            axisLine={false}
+            tickFormatter={(value) => `${TAKA}${value}`}
+          />
+          <Bar dataKey="amount" fill="#adfa1d" radius={[4, 4, 0, 0]} />
+        </BarChart>
+      )}
     </ResponsiveContainer>
   );
 }

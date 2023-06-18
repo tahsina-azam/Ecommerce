@@ -1,11 +1,11 @@
 import { useToggleCartModalOpen } from "@/hooks/useCartModal";
 import { useCartSize } from "@/hooks/useCartStore";
-import { useClearCurrentUser } from "@/hooks/useCurrentUser";
+import { useClearCurrentUser, useCurrentUser } from "@/hooks/useCurrentUser";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import CartModal from "../cart/CartModal";
+import { UserAccountNav } from "../user-account-nav";
 
 type HeaderType = {
   isErrorPage?: Boolean;
@@ -25,6 +25,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
   const navRef = useRef(null);
 
   const toggleCartModal = useToggleCartModalOpen();
+  const { name, email } = useCurrentUser();
 
   const headerClass = () => {
     if (window.pageYOffset === 0) {
@@ -55,8 +56,8 @@ const Header = ({ isErrorPage }: HeaderType) => {
           <span className="mr-2 text-4xl text-gray-800">
             <Image
               src="/images/abstract-shape.png"
-              width={50}
-              height={50}
+              width={24}
+              height={24}
               alt="Picture of the author"
             />
           </span>
@@ -66,7 +67,6 @@ const Header = ({ isErrorPage }: HeaderType) => {
           ref={navRef}
           className={`site-nav ${menuOpen ? "site-nav--open" : ""}`}
         >
-          <Link href="/products">Products</Link>
           <button className="site-nav__btn">
             <p>Account</p>
           </button>
@@ -81,11 +81,15 @@ const Header = ({ isErrorPage }: HeaderType) => {
               )}
             </button>
           </div>
-          <Link href="/sign-in">
-            <button className="site-header__btn-avatar" onClick={handleSignOut}>
-              <i className="icon-avatar"></i>
-            </button>
-          </Link>
+
+          <UserAccountNav
+            user={{
+              name: name,
+              image: "",
+              email: email,
+            }}
+          />
+
           <button
             onClick={() => setMenuOpen(true)}
             className="site-header__btn-menu"

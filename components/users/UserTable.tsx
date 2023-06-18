@@ -1,9 +1,11 @@
 import { User } from "@/global";
 import { Group, Table, Text } from "@mantine/core";
 import { useMemo } from "react";
+import { Skeleton } from "../skeleton";
 
 interface UserTableProps {
   data: User[];
+  isLoading?: boolean;
 }
 
 const statusData = [
@@ -16,7 +18,7 @@ const statusData = [
 
 export type OrderStatus = (typeof statusData)[number];
 
-export default function UserTable({ data }: UserTableProps) {
+export default function UserTable({ data, isLoading }: UserTableProps) {
   const rows = useMemo(
     () =>
       data.map((item) => (
@@ -40,6 +42,38 @@ export default function UserTable({ data }: UserTableProps) {
       )),
     [data]
   );
+
+  if (isLoading)
+    return (
+      <Table verticalSpacing="sm">
+        <thead>
+          <tr>
+            <th>User Id</th>
+            <th>Info</th>
+            <th>Address</th>
+            <th>Account Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 2 }).map((_, i) => (
+            <tr key={i} className="text-sm">
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
 
   return (
     <Table verticalSpacing="sm">

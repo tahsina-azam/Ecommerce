@@ -5,9 +5,11 @@ import { useMemo, useState } from "react";
 import { Button } from "../Button";
 import ProductModal from "../orders/ProductModal";
 import { TAKA } from "../products/product-item";
+import { Skeleton } from "../skeleton";
 
 interface OrderTableProps {
   data: Order[];
+  isLoading?: boolean;
 }
 
 const statusData = [
@@ -20,7 +22,7 @@ const statusData = [
 
 export type OrderStatus = (typeof statusData)[number];
 
-export default function UserOrderTable({ data }: OrderTableProps) {
+export default function UserOrderTable({ data, isLoading }: OrderTableProps) {
   const [selected, setSelected] = useState<Order | null>(null);
 
   const close = () => {
@@ -29,13 +31,12 @@ export default function UserOrderTable({ data }: OrderTableProps) {
 
   const rows = useMemo(
     () =>
-      data.map((item) => (
+      (data ?? []).map((item) => (
         <tr key={item.orderId} className="text-sm">
           <td className="text-black/70">{item.orderId}</td>
           <td className="text-black/70 text-left">
             <Badge variant="light">{item.status}</Badge>
           </td>
-          {/* <td className="text-black/70">{item.transactionId}</td> */}
           <td>
             <Badge fullWidth>{`${TAKA} ${item.amount}`}</Badge>
           </td>
@@ -49,13 +50,44 @@ export default function UserOrderTable({ data }: OrderTableProps) {
     [data]
   );
 
+  if (isLoading)
+    return (
+      <Table verticalSpacing="sm">
+        <thead>
+          <tr>
+            <th>Order Id</th>
+            <th>Status</th>
+            <th>Amount</th>
+            <th>Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 6 }).map((_, i) => (
+            <tr key={i} className="text-sm">
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
+
   return (
     <Table verticalSpacing="sm">
       <thead>
         <tr>
           <th>Order Id</th>
           <th>Status</th>
-          {/* <th>Transaction Id</th> */}
           <th>Amount</th>
           <th>Products</th>
         </tr>

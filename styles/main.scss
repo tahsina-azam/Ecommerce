@@ -196,9 +196,9 @@ h5 {
 }
 
 .main-page {
-  padding-top: 65px;
+  padding-top: 15px;
   @include breakpoint(phone) {
-    padding-top: 100px;
+    padding-top: 12px;
   }
 }
 
@@ -318,7 +318,7 @@ h5 {
 }
 
 .site-header {
-  position: fixed;
+  // position: fixed;
   width: 100%;
   top: 0;
   left: 0;

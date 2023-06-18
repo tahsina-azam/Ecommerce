@@ -2,6 +2,7 @@ import RetailerLayout from "@/components/Layout/retailer";
 import { DashboardHeader } from "@/components/header";
 import OrderTable from "@/components/orders";
 import { DashboardShell } from "@/components/shell";
+import { OrderData } from "@/global";
 import { useOrder } from "@/hooks/useOrder";
 
 const Orders = () => {
@@ -9,15 +10,15 @@ const Orders = () => {
     status: "confirmed",
   });
 
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (!data) return <h1>No data</h1>;
   return (
     <RetailerLayout>
       <DashboardShell>
         <DashboardHeader heading="Retailer Orders" text="Manage orders" />
         <div className="w-full">
-          <OrderTable data={data} />
+          <OrderTable
+            data={data ?? ([] as OrderData[])}
+            isLoading={isLoading}
+          />
         </div>
       </DashboardShell>
     </RetailerLayout>

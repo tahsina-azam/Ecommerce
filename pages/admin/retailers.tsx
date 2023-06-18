@@ -9,14 +9,11 @@ const Retailers = () => {
 
   const retailers = data?.filter((user) => user.role === "supplier") ?? [];
 
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (!data) return <h1>No data</h1>;
   return (
     <AdminLayout>
       <DashboardShell>
         <DashboardHeader heading="Retailers" text="Manage retailers" />
-        <UserTable data={retailers} />
+        <UserTable data={retailers} isLoading={isLoading} />
       </DashboardShell>
     </AdminLayout>
   );

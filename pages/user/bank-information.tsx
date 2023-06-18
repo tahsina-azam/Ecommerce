@@ -4,28 +4,38 @@ import { DashboardShell } from "@/components/shell";
 import { UserNameForm } from "@/components/user-name-form";
 import { useBank } from "@/hooks/useBank";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useRouter } from "next/router";
 
 const BankInformation = () => {
   const { data, isLoading } = useBank();
-  const { name, email } = useCurrentUser();
+  const { name, email, role } = useCurrentUser();
+  const router = useRouter();
+
+  const isLoggedIn = !!role;
+
+  if (!isLoggedIn) {
+    router.push("/sign-in");
+  }
+
+  if (role !== "user") {
+    if (role === "supplier") router.push("/retailer/bank-information");
+    else router.push("/admin/bank-information");
+  }
 
   return (
     <DashboardLayout role="user">
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <DashboardShell>
-          <DashboardHeader heading="Bank Information" text="Manage account" />
-          <div className="grid gap-10">
-            <UserNameForm
-              name={name}
-              email={email}
-              deposit={data?.deposit as number}
-              accountId={data?.accountId as string}
-            />
-          </div>
-        </DashboardShell>
-      )}
+      <DashboardShell>
+        <DashboardHeader heading="Bank Information" text="Manage account" />
+        <div className="grid gap-10">
+          <UserNameForm
+            name={name}
+            email={email}
+            deposit={data?.deposit as number}
+            accountId={data?.accountId as string}
+            isLoading={isLoading}
+          />
+        </div>
+      </DashboardShell>
     </DashboardLayout>
   );
 };

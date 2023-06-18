@@ -9,14 +9,11 @@ const Customers = () => {
 
   const customers = data?.filter((user) => user.role === "user") ?? [];
 
-  if (isLoading) return <h1>Loading...</h1>;
-
-  if (!data) return <h1>No data</h1>;
   return (
     <AdminLayout>
       <DashboardShell>
         <DashboardHeader heading="Customers" text="Manage customers" />
-        <UserTable data={customers} />
+        <UserTable data={customers} isLoading={isLoading} />
       </DashboardShell>
     </AdminLayout>
   );

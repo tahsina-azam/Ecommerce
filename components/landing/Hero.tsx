@@ -1,7 +1,12 @@
+import { useAuth, useCurrentUser } from "@/hooks/useCurrentUser";
 import Image from "next/image";
 import Link from "next/link";
+import { UserAccountNav } from "../user-account-nav";
 
 function Hero() {
+  const isLogged = useAuth();
+  const { name, email } = useCurrentUser();
+
   return (
     <div>
       <div className="">
@@ -45,20 +50,29 @@ function Hero() {
             aria-label="Header Navigation"
             className="flex max-h-0 w-full flex-col items-center justify-between overflow-hidden transition-all peer-checked:mt-8 peer-checked:max-h-56 md:ml-24 md:max-h-full md:flex-row md:items-start"
           >
-            <ul className="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
-              <li className="font-bold md:mr-12">
-                <Link href="/register">SignUp</Link>
-              </li>
+            {!isLogged && (
+              <ul className="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
+                <li className="font-bold md:mr-12">
+                  <Link href="/register">SignUp</Link>
+                </li>
 
-              <li className="md:mr-12">
-                <Link href="/sign-in">
-                  <button className="rounded-full border-2 border-gray-900 px-6 py-1 text-gray-900 transition-colors hover:bg-blue-900 hover:text-white">
-                    Login
-                  </button>
-                </Link>
-              </li>
-            </ul>
+                <li className="md:mr-12">
+                  <Link href="/sign-in">
+                    <button className="rounded-full border-2 border-gray-900 px-6 py-1 text-gray-900 transition-colors hover:bg-blue-900 hover:text-white">
+                      Login
+                    </button>
+                  </Link>
+                </li>
+              </ul>
+            )}
           </nav>
+          <UserAccountNav
+            user={{
+              name: name,
+              image: "",
+              email: email,
+            }}
+          />
         </header>
 
         <div className="mx-auto h-full px-4 py-20 md:py-36 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
@@ -92,12 +106,12 @@ function Hero() {
                 </p>
               </div>
               <div className="mt-10 flex flex-col items-center md:flex-row">
-                <a
+                <Link
                   href="/"
                   className="mb-3 inline-flex h-12 w-full items-center justify-center rounded bg-gray-700 px-6 font-medium tracking-wide text-white shadow-md transition hover:bg-blue-800 focus:outline-none md:mr-4 md:mb-0 md:w-auto"
                 >
-                  Stream Now{" "}
-                </a>
+                  Shop Now{" "}
+                </Link>
               </div>
             </div>
             <div className="relative hidden lg:ml-32 lg:block lg:w-1/2">

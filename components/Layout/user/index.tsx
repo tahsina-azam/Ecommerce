@@ -8,6 +8,11 @@ export const dashboardConfig = {
   sidebarNav: {
     admin: [
       {
+        title: "Dashboard",
+        href: "/admin/dashboard",
+        icon: "post",
+      },
+      {
         title: "Orders",
         href: "/admin/orders",
         icon: "post",
@@ -74,6 +79,7 @@ export default function DashboardLayout({
   role = "user",
 }: DashboardLayoutProps) {
   const { name, email } = useCurrentUser();
+
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">

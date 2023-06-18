@@ -3,6 +3,7 @@ import * as React from "react";
 
 import { Icons } from "@/components/icons";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface MainNavProps {
   items?: any[];
@@ -15,8 +16,13 @@ export function MainNav({ items, children }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
       <Link href="/" className="hidden items-center space-x-2 md:flex">
-        <Icons.logo />
-        <span className="hidden font-bold sm:inline-block">E-Commerce</span>
+        <Image
+          src="/images/abstract-shape.png"
+          width={24}
+          height={204}
+          alt="Picture of the author"
+        />
+        <span className="hidden font-bold sm:inline-block">Shoppers</span>
       </Link>
       {items?.length ? (
         <nav className="hidden gap-6 md:flex">

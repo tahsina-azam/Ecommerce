@@ -4,6 +4,7 @@ import { Activity, CreditCard, DollarSign, Users } from "lucide-react";
 import { useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./card";
 import { TAKA } from "./products/product-item";
+import { Skeleton } from "./skeleton";
 const Icons = [DollarSign, Users, CreditCard, Activity];
 const AggregationCards = () => {
   const { data, isLoading } = useAggregate();
@@ -34,7 +35,18 @@ const AggregationCards = () => {
       );
     });
   }, [data]);
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading)
+    return (
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        {Array.from({ length: 5 }, (_, i) => i + 1).map((id) => (
+          <Card key={id}>
+            <Skeleton className="flex flex-row items-center justify-between space-y-0 pb-2 h-10"></Skeleton>
+            <Skeleton className="h-24 mt-1"></Skeleton>
+          </Card>
+        ))}
+      </div>
+    );
+
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">{items}</div>
   );

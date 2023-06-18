@@ -5,10 +5,12 @@ import { useRouter } from "next/router";
 import { useMemo, useState } from "react";
 import { Button } from "../Button";
 import { TAKA } from "../products/product-item";
+import { Skeleton } from "../skeleton";
 import ProductModal from "./ProductModal";
 
 interface OrderTableProps {
   data: OrderData[];
+  isLoading?: boolean;
 }
 
 const statusData = [
@@ -21,7 +23,10 @@ const statusData = [
 
 export type OrderStatus = (typeof statusData)[number];
 
-export default function OrderTable({ data }: OrderTableProps) {
+export default function OrderTable({
+  data,
+  isLoading: ordersLoading,
+}: OrderTableProps) {
   const [selected, setSelected] = useState<OrderData | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -57,61 +62,94 @@ export default function OrderTable({ data }: OrderTableProps) {
 
   const rows = useMemo(
     () =>
-      data.map((item) => (
-        <tr key={item.orderId} className="text-sm">
-          <td className="text-black/70">{item.orderId}</td>
-          <td>
-            <Select
-              size="xs"
-              data={!isOnRetail ? statusData.slice(0, 3) : statusData.slice(1)}
-              defaultValue={item.status}
-              variant="unstyled"
-              disabled={isLoading}
-              onChange={(status) =>
-                handleOrderStatusChange(
-                  status as OrderStatus,
-                  item.transactionId,
-                  item.status as OrderStatus
-                )
-              }
-            />
-          </td>
-          <td>
-            <Group spacing="sm">
-              <div>
-                <Text fz="sm" fw={500}>
-                  {item.user.name}
-                </Text>
-                <Text fz="xs" c="dimmed">
-                  {item.user.email}
-                </Text>
-              </div>
-            </Group>
-          </td>
-          <td>{item.address}</td>
-
-          {/* <td>
-        {Math.random() > 0.5 ? (
-          <Badge fullWidth>Active</Badge>
-        ) : (
-          <Badge color="gray" fullWidth>
-            Disabled
-          </Badge>
-        )}
-      </td> */}
-          {/* <td className="text-black/70">{item.transactionId}</td> */}
-          <td>
-            <Badge fullWidth>{`${TAKA} ${item.amount}`}</Badge>
-          </td>
-          <td onClick={() => setSelected(item)}>
-            <Button size="sm" compact>
-              Show products
-            </Button>
-          </td>
-        </tr>
-      )),
+      (data ?? [])
+        .filter((item) => !["shipping", "delivered"].includes(item.status))
+        .map((item) => (
+          <tr key={item.orderId} className="text-sm">
+            <td className="text-black/70">{item.orderId}</td>
+            <td>
+              <Select
+                size="xs"
+                data={
+                  !isOnRetail ? statusData.slice(0, 3) : statusData.slice(1)
+                }
+                defaultValue={item.status}
+                variant="unstyled"
+                disabled={isLoading}
+                onChange={(status) =>
+                  handleOrderStatusChange(
+                    status as OrderStatus,
+                    item.transactionId,
+                    item.status as OrderStatus
+                  )
+                }
+              />
+            </td>
+            <td>
+              <Group spacing="sm">
+                <div>
+                  <Text fz="sm" fw={500}>
+                    {item.user.name}
+                  </Text>
+                  <Text fz="xs" c="dimmed">
+                    {item.user.email}
+                  </Text>
+                </div>
+              </Group>
+            </td>
+            <td>{item.address}</td>
+            <td>
+              <Badge fullWidth>{`${TAKA} ${item.amount}`}</Badge>
+            </td>
+            <td onClick={() => setSelected(item)}>
+              <Button size="sm" compact>
+                Show products
+              </Button>
+            </td>
+          </tr>
+        )),
     [data]
   );
+
+  if (ordersLoading)
+    return (
+      <Table verticalSpacing="sm">
+        <thead>
+          <tr>
+            <th>Order Id</th>
+            <th>Status</th>
+            <th>Customer</th>
+            <th>Address</th>
+            <th>Amount</th>
+            <th>Products</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Array.from({ length: 12 }).map((_, i) => (
+            <tr key={i} className="text-sm">
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+              <td>
+                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    );
 
   return (
     <Table verticalSpacing="sm">
@@ -121,7 +159,6 @@ export default function OrderTable({ data }: OrderTableProps) {
           <th>Status</th>
           <th>Customer</th>
           <th>Address</th>
-          {/* <th>Transaction Id</th> */}
           <th>Amount</th>
           <th>Products</th>
         </tr>

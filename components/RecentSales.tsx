@@ -2,6 +2,7 @@ import { Avatar, AvatarFallback } from "@/components/avatar";
 import { useRecentOrder } from "@/hooks/useRecentSales";
 import { useMemo } from "react";
 import { TAKA } from "./products/product-item";
+import { Skeleton } from "./skeleton";
 
 export function RecentSales() {
   const { data, isLoading } = useRecentOrder();
@@ -24,8 +25,18 @@ export function RecentSales() {
       </div>
     ));
   }, [data]);
-  if (isLoading) return <h1>Loading...</h1>;
-  if (!data) return <h1>No data</h1>;
+  if (isLoading)
+    return (
+      <div className="space-y-8">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div className="flex items-center" key={i}>
+            <Skeleton className="h-9 w-9 rounded-full"></Skeleton>
+            <Skeleton className="ml-4 space-y-1 w-full h-10"></Skeleton>
+            <Skeleton className="ml-auto font-medium"></Skeleton>
+          </div>
+        ))}
+      </div>
+    );
 
   return <div className="space-y-8">{recentOrders}</div>;
 }

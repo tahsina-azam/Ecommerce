@@ -11,21 +11,18 @@ const BankInformation = () => {
 
   return (
     <AdminLayout>
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-        <DashboardShell>
-          <DashboardHeader heading="Bank Information" text="Manage account" />
-          <div className="grid gap-10">
-            <UserNameForm
-              name={name}
-              email={email}
-              deposit={data?.deposit as number}
-              accountId={data?.accountId as string}
-            />
-          </div>
-        </DashboardShell>
-      )}
+      <DashboardShell>
+        <DashboardHeader heading="Bank Information" text="Manage account" />
+        <div className="grid gap-10">
+          <UserNameForm
+            name={name}
+            email={email}
+            deposit={data?.deposit as number}
+            accountId={data?.accountId as string}
+            isLoading={isLoading}
+          />
+        </div>
+      </DashboardShell>
     </AdminLayout>
   );
 };
