@@ -22,7 +22,8 @@ const AllOrders = () => {
 
   if (role !== "user") {
     if (role === "supplier") router.push("/retailer/orders");
-    else router.push("/admin/orders");
+    else if (role == "admin") router.push("/admin/orders");
+    else router.push("/sign-in");
   }
 
   return (

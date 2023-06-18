@@ -28,6 +28,13 @@ export default async function handler(
     where: {
       email,
     },
+    include: {
+      bank: {
+        select: {
+          deposit: true,
+        },
+      },
+    },
   });
 
   if (!user) {
@@ -46,6 +53,11 @@ export default async function handler(
       role: user.role,
       address: user.address,
       userId: user.userId,
+      accountId: user.accountId,
+      bank: {
+        deposit: user.bank.deposit,
+      },
+      image: "",
     },
   });
 }

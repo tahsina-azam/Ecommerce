@@ -19,7 +19,8 @@ const BankInformation = () => {
 
   if (role !== "user") {
     if (role === "supplier") router.push("/retailer/bank-information");
-    else router.push("/admin/bank-information");
+    else if (role == "admin") router.push("/admin/bank-information");
+    else router.push("/sign-in");
   }
 
   return (

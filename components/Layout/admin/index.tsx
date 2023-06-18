@@ -12,8 +12,13 @@ const AdminLayout = ({ children }: PropsWithChildren) => {
   if (!isLoggedIn) router.push("/sign-in");
 
   if (role !== "admin") {
-    if (role === "supplier") router.push("/retailer/orders");
-    else router.push("/products");
+    if (role === "supplier") {
+      router.push("/retailer/orders");
+    } else if (role == "user") {
+      router.push("/products");
+    } else {
+      router.push("/sign-in");
+    }
   }
 
   return <DashboardLayout role="admin">{children}</DashboardLayout>;

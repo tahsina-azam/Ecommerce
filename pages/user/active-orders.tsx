@@ -20,7 +20,8 @@ const ActiveOrders = () => {
 
   if (role !== "user") {
     if (role === "supplier") router.push("/retailer/orders");
-    else router.push("/admin/bank-information");
+    else if (role == "admin") router.push("/admin/bank-information");
+    else router.push("/sign-in");
   }
 
   const activeOrders =

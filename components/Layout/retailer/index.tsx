@@ -11,8 +11,13 @@ const RetailerLayout = ({ children }: PropsWithChildren) => {
   if (!isLoggedIn) router.push("/sign-in");
 
   if (role !== "supplier") {
-    if (role === "admin") router.push("/admin/dashboard");
-    else router.push("/products");
+    if (role === "admin") {
+      router.push("/admin/dashboard");
+    } else if (role == "user") {
+      router.push("/products");
+    } else {
+      router.push("/sign-in");
+    }
   }
   return <DashboardLayout role="supplier">{children}</DashboardLayout>;
 };
