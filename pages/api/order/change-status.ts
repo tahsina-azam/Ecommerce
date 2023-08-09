@@ -47,9 +47,10 @@ export default async function handler(
               },
             });
             if (!supplier) throw new Error(`Supplier not found`);
+            
             const admin = await db.user.findFirst({
               where: {
-                role: "supplier",
+                role: "admin",
               },
               select: {
                 userId: true,
@@ -64,6 +65,7 @@ export default async function handler(
               receiverUserId: supplier.userId,
             });
             console.log({ transaction });
+            
             if (!transaction) {
               return res.status(401).json({ message: "Transaction failed" });
             }
@@ -107,7 +109,7 @@ export default async function handler(
             if (!receiver) throw new Error(`Receiver not found`);
             const admin = await db.user.findFirst({
               where: {
-                role: "supplier",
+                role: "admin",
               },
               select: {
                 userId: true,
