@@ -29,19 +29,19 @@ export function UserNameForm({
   return (
     <form className={cn(className)} {...props}>
       <Card>
-        <div className="flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <CardHeader>
               <CardTitle>Name</CardTitle>
             </CardHeader>
             <CardContent>
               {isLoading ? (
-                <Skeleton className="w-[400px] h-10"></Skeleton>
+                <Skeleton className="w-full h-10"></Skeleton>
               ) : (
                 <div className="grid gap-1">
                   <Input
                     id="name"
-                    className="w-[400px]"
+                    className="w-full"
                     size={32}
                     value={name}
                     readOnly
@@ -56,12 +56,12 @@ export function UserNameForm({
             </CardHeader>
             <CardContent>
               {isLoading ? (
-                <Skeleton className="w-[400px] h-10"></Skeleton>
+                <Skeleton className="w-full h-10"></Skeleton>
               ) : (
                 <div className="grid gap-1">
                   <Input
-                    id="name"
-                    className="w-[400px]"
+                    id="email"
+                    className="w-full"
                     size={32}
                     value={email}
                     readOnly
@@ -73,19 +73,19 @@ export function UserNameForm({
         </div>
       </Card>
       <Card className="mt-4">
-        <div className="flex">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <CardHeader>
               <CardTitle>Account Id</CardTitle>
             </CardHeader>
             <CardContent>
               {isLoading ? (
-                <Skeleton className="w-[400px] h-10"></Skeleton>
+                <Skeleton className="w-full h-10"></Skeleton>
               ) : (
                 <div className="grid gap-1">
                   <Input
-                    id="name"
-                    className="w-[400px]"
+                    id="accountId"
+                    className="w-full"
                     size={32}
                     value={accountId}
                     readOnly
@@ -100,12 +100,12 @@ export function UserNameForm({
             </CardHeader>
             <CardContent>
               {isLoading ? (
-                <Skeleton className="w-[400px] h-10"></Skeleton>
+                <Skeleton className="w-full h-10"></Skeleton>
               ) : (
                 <div className="grid gap-1">
                   <Input
-                    id="name"
-                    className="w-[400px]"
+                    id="deposit"
+                    className="w-full"
                     size={32}
                     value={deposit}
                     readOnly

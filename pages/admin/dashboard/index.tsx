@@ -24,8 +24,8 @@ const Dashboard = () => {
 
           <TabsContent value="overview" className="space-y-4">
             <AggregationCards />
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7 pt-6">
-              <Card className="col-span-4">
+            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7 pt-6">
+              <Card className="col-span-4 lg:col-span-4">
                 <CardHeader>
                   <CardTitle>Overview</CardTitle>
                 </CardHeader>
@@ -33,7 +33,7 @@ const Dashboard = () => {
                   <Overview />
                 </CardContent>
               </Card>
-              <Card className="col-span-3">
+              <Card className="col-span-4 lg:col-span-3">
                 <CardHeader>
                   <CardTitle>Recent Sales</CardTitle>
                 </CardHeader>

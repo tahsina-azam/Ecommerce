@@ -1,7 +1,7 @@
 export const products = [
   {
     id: "1",
-    name: "Shirt Summer Vibes",
+    name: "Shirt Summer",
     type: "men-clothing",
     price: 119.99,
     discount: 30,
@@ -63,7 +63,7 @@ export const products = [
   },
   {
     id: "2",
-    name: "Shirt Casual",
+    name: "Shirt Checked",
     type: "men-clothing",
     price: 119.99,
     quantityAvailable: 2,
@@ -293,7 +293,7 @@ export const products = [
   },
   {
     id: "6",
-    name: "Shirt Layered",
+    name: "Shirt Layer",
     type: "men-clothing",
     price: 119.99,
     discount: 30,
@@ -453,7 +453,7 @@ export const products = [
   },
   {
     id: "9",
-    name: "Mi smart watch",
+    name: "Xiaomi smart watch",
     type: "electronics",
     price: 2000,
     quantityAvailable: 2,
@@ -462,7 +462,7 @@ export const products = [
     sizes: ["xl", "l"],
     colors: ["#000", "6F3E18", "#D4BE8D", "#FFF"],
     images: [
-      "https://azse77seaprodsa.blob.core.windows.net/b2b-dr-pickaboocdn/media/catalog/product/cache/a452da278a89f00548b398f225b4466e/r/e/redmi-watch-2-lite-waterproof-smart-watch_1.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjYxn1gzATwVmb1wiboL9XTfusqLRo502SvAbTYSkOSg&s",
     ],
     punctuation: {
       countOpinions: 81,
@@ -596,7 +596,7 @@ export const products = [
   },
   {
     id: "12",
-    name: "Mojave Ghost",
+    name: "Byredo",
     type: "fragrances",
     price: 8000,
     quantityAvailable: 2,

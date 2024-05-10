@@ -1,7 +1,7 @@
 function Feature() {
   return (
     <div>
-      <div className="bg-gray-800 mx-auto py-10 grid max-w-screen-xl grid-cols-1 text-white pl-6 pr-4 sm:px-20 lg:grid-cols-3">
+      <div className="bg-gray-800 mx-auto py-10 grid grid-cols-1 max-w-screen-xl text-white sm:px-20 lg:grid-cols-3">
         <div className="col-span-1 flex flex-col justify-center text-center sm:text-left md:pr-10">
           <h1 className="mb-6 text-4xl text-white">Things you can do here</h1>
           <p className="text-gray-400">
@@ -15,7 +15,7 @@ function Feature() {
               01
             </div>
             <div className="">
-              <h3 className="text-xl font-semibold">Men's clothing </h3>
+              <h3 className="text-xl font-semibold">Men`&apos;`s clothing </h3>
               <p className="text-gray-400 mt-3">
                 We have collection of men wear which are in current trend
               </p>

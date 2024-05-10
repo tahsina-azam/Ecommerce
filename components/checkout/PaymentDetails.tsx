@@ -8,6 +8,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { Button } from "../Button";
 import { TAKA } from "../products/product-item";
+import GoBackButton from "../users/GoBackButton";
 
 export type OrderData = {
   email: string;
@@ -227,12 +228,13 @@ const PaymentDetails = ({
         </div>
       </div>
       <Button
-        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-2 font-medium text-white hover:bg-gray-800"
+        className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-2 mb-1 font-medium text-white hover:bg-gray-800"
         type="submit"
         loading={loading}
       >
         Place Order
       </Button>
+      <GoBackButton/>
     </form>
   );
 };

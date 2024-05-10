@@ -1,12 +1,14 @@
-import { useCartItems } from "@/hooks/useCartStore";
+import { useToggleCartModalClose } from "@/hooks/useCartModal";
 import Link from "next/link";
 import { useMemo } from "react";
 import LottieAnimation from "../LottieAnimation";
 import Price from "../Price";
 import CartItem from "./CartItem";
+import { useCartItems } from "@/hooks/useCartStore";
 
 const ModalContent = () => {
   const cartItems = useCartItems();
+  const toggleModalClose = useToggleCartModalClose(); // Hook to close the modal
 
   const priceTotal = useMemo(() => {
     let totalPrice = 0;
@@ -80,12 +82,21 @@ const ModalContent = () => {
             </div>
             <Link
               href="/checkout"
-              className="flex w-full items-center justify-center bg-black p-3 text-sm font-medium uppercase text-white opacity-90 hover:opacity-100 dark:bg-white dark:text-black rounded-md"
+              className="flex w-full items-center justify-center bg-black p-3 mb-2 text-sm font-medium uppercase text-white opacity-90 hover:opacity-100 dark:bg-white dark:text-black rounded-md"
             >
               <span>Proceed to Checkout</span>
             </Link>
           </div>
         )}
+       <div className="flex flex-col justify-end h-full">
+          <div className="flex-grow"></div> {/* Spacer to push the link to the bottom */}
+          <button
+            onClick={toggleModalClose} // Close the modal when clicked
+            className="flex w-full items-center justify-center bg-black p-3 text-sm font-medium uppercase text-white opacity-90 hover:opacity-100 dark:bg-white dark:text-black rounded-md"
+          >
+            <span>Close Cart</span>
+          </button>
+        </div>
       </div>
     </section>
   );

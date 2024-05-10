@@ -14,7 +14,8 @@ const Orders = () => {
     <RetailerLayout>
       <DashboardShell>
         <DashboardHeader heading="Retailer Orders" text="Manage orders" />
-        <div className="w-full">
+        <div style={{overflowX:"auto"}
+        } >
           <OrderTable
             data={data ?? ([] as OrderData[])}
             isLoading={isLoading}

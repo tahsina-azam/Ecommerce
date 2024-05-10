@@ -1,7 +1,4 @@
 import { useEffect, useState } from "react";
-// import Checkbox from "./form-builder/checkbox";
-
-// data
 import productsTypes from "@/utils/data/products-types";
 import { Checkbox } from "@mantine/core";
 import { useRouter } from "next/router";
@@ -24,6 +21,14 @@ const ProductsFilter = () => {
         query: { filter: type.toLowerCase() },
       });
     }
+  };
+
+  const handleShowAll = () => {
+    setFilter(""); // Reset the filter state
+    router.push({
+      pathname: router.pathname,
+      query: {},
+    });
   };
 
   useEffect(() => {
@@ -68,10 +73,11 @@ const ProductsFilter = () => {
         </div>
 
         <button
-          type="submit"
+          type="button"
+          onClick={handleShowAll}
           className="btn btn-submit btn--rounded btn--yellow"
         >
-          Apply
+          Show All
         </button>
       </div>
     </form>

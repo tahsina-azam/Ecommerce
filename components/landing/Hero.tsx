@@ -1,5 +1,4 @@
 import { useAuth, useCurrentUser } from "@/hooks/useCurrentUser";
-import Image from "next/image";
 import Link from "next/link";
 import { UserAccountNav } from "../user-account-nav";
 
@@ -10,16 +9,14 @@ function Hero() {
   return (
     <div>
       <div className="">
-        <header className="relative flex max-w-screen-xl flex-col overflow-hidden px-4 py-4 text-gray-800 md:mx-auto md:flex-row md:items-center">
+        <header className="relative flex flex-col overflow-hidden px-4 py-4 text-gray-800 md:mx-auto md:flex-row md:items-center">
           <a
             href="#"
-            className="flex items-center whitespace-nowrap text-2xl font-black"
+            className="flex items-center whitespace-nowrap text-2xl font-black md:ml-12"
           >
-            <span className="mr-2 text-4xl text-gray-800">
-              <Image
+            <span className="mr-2 text-4xl text-gray-800 w-8">
+              <img
                 src="/images/abstract-shape.png"
-                width={70}
-                height={70}
                 alt="Picture of the author"
               />
             </span>
@@ -27,7 +24,7 @@ function Hero() {
           </a>
           <input type="checkbox" className="peer hidden" id="navbar-open" />
           <label
-            className="absolute top-5 right-7 cursor-pointer md:hidden"
+            className="flex items-center absolute top-5 right-7 cursor-pointer md:hidden"
             htmlFor="navbar-open"
           >
             <span className="sr-only">Toggle Navigation</span>
@@ -65,17 +62,21 @@ function Hero() {
                 </li>
               </ul>
             )}
+            {isLogged && (
+              <ul className="flex flex-col items-center space-y-2 md:ml-auto md:flex-row md:space-y-0">
+                <UserAccountNav
+                  user={{
+                    name: name,
+                    image: "",
+                    email: email,
+                  }}
+                />
+              </ul>
+            )}
           </nav>
-          <UserAccountNav
-            user={{
-              name: name,
-              image: "",
-              email: email,
-            }}
-          />
         </header>
 
-        <div className="mx-auto h-full px-4 py-20 md:py-36 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-8">
+        <div className="mx-auto h-full px-4 py-20 md:py-36 sm:max-w-xl md:max-w-full md:px-24 lg:max-w-screen-xl lg:px-4">
           <div className="flex flex-col items-center justify-between lg:flex-row">
             <div className=" ">
               <div className="lg:max-w-xl lg:pr-5">
@@ -114,7 +115,7 @@ function Hero() {
                 </Link>
               </div>
             </div>
-            <div className="relative hidden lg:ml-32 lg:block lg:w-1/2">
+            <div className="relative hidden lg:ml-32 lg:block">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="my-6 mx-auto h-10 w-10 animate-bounce rounded-full bg-blue-50 p-2 lg:hidden"

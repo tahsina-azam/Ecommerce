@@ -52,6 +52,40 @@ export default function UserOrderTable({ data, isLoading }: OrderTableProps) {
 
   if (isLoading)
     return (
+      <div style={{ overflowX: "auto" }}> {/* Added container with overflow handling */}
+        <Table verticalSpacing="sm">
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Status</th>
+              <th>Amount</th>
+              <th>Products</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.from({ length: 6 }).map((_, i) => (
+              <tr key={i} className="text-sm">
+                <td>
+                  <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+                </td>
+                <td>
+                  <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+                </td>
+                <td>
+                  <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+                </td>
+                <td>
+                  <Skeleton className="w-[180px] h-[32px]"></Skeleton>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
+    );
+
+  return (
+    <div style={{ overflowX: "auto" }}> {/* Added container with overflow handling */}
       <Table verticalSpacing="sm">
         <thead>
           <tr>
@@ -61,45 +95,15 @@ export default function UserOrderTable({ data, isLoading }: OrderTableProps) {
             <th>Products</th>
           </tr>
         </thead>
-        <tbody>
-          {Array.from({ length: 6 }).map((_, i) => (
-            <tr key={i} className="text-sm">
-              <td>
-                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
-              </td>
-              <td>
-                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
-              </td>
-              <td>
-                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
-              </td>
-              <td>
-                <Skeleton className="w-[180px] h-[32px]"></Skeleton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{rows}</tbody>
+        {selected && (
+          <ProductModal
+            products={selected.products as ProductType[]}
+            opened={selected != null}
+            close={close}
+          />
+        )}
       </Table>
-    );
-
-  return (
-    <Table verticalSpacing="sm">
-      <thead>
-        <tr>
-          <th>Order Id</th>
-          <th>Status</th>
-          <th>Amount</th>
-          <th>Products</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-      {selected && (
-        <ProductModal
-          products={selected.products as ProductType[]}
-          opened={selected != null}
-          close={close}
-        />
-      )}
-    </Table>
+    </div>
   );
 }

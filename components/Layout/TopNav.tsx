@@ -47,7 +47,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
   }, []);
 
   return (
-    <header className={`site-header ${!onTop ? "site-header--fixed" : ""}`}>
+    <header  className={`site-header sticky ${!onTop ? "site-header--fixed" :  ""}`}>
       <div className="container">
         <a
           href="#"
@@ -90,14 +90,14 @@ const Header = ({ isErrorPage }: HeaderType) => {
             }}
           />
 
-          <button
+          {/* <button
             onClick={() => setMenuOpen(true)}
             className="site-header__btn-menu"
           >
             <i className="btn-hamburger">
               <span></span>
             </i>
-          </button>
+          </button> */}
         </div>
       </div>
       <CartModal />

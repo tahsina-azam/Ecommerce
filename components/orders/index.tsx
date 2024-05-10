@@ -76,6 +76,7 @@ export default function OrderTable({
                 defaultValue={item.status}
                 variant="unstyled"
                 disabled={isLoading}
+                style={{ minWidth: '100px' }}
                 onChange={(status) =>
                   handleOrderStatusChange(
                     status as OrderStatus,
@@ -113,6 +114,7 @@ export default function OrderTable({
 
   if (ordersLoading)
     return (
+      <div style={{ overflowX: "auto" }}>
       <Table verticalSpacing="sm">
         <thead>
           <tr>
@@ -149,9 +151,11 @@ export default function OrderTable({
           ))}
         </tbody>
       </Table>
+      </div>
     );
 
   return (
+    <div style={{ overflowX: "auto" }}>
     <Table verticalSpacing="sm">
       <thead>
         <tr>
@@ -172,5 +176,6 @@ export default function OrderTable({
         />
       )}
     </Table>
+    </div>
   );
 }

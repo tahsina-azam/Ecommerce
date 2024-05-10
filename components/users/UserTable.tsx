@@ -45,6 +45,7 @@ export default function UserTable({ data, isLoading }: UserTableProps) {
 
   if (isLoading)
     return (
+     <div style={{overflowX: "auto"}}>
       <Table verticalSpacing="sm">
         <thead>
           <tr>
@@ -73,9 +74,11 @@ export default function UserTable({ data, isLoading }: UserTableProps) {
           ))}
         </tbody>
       </Table>
+      </div>
     );
 
   return (
+    <div style={{overflowX: "auto"}}>
     <Table verticalSpacing="sm">
       <thead>
         <tr>
@@ -87,5 +90,6 @@ export default function UserTable({ data, isLoading }: UserTableProps) {
       </thead>
       <tbody>{rows}</tbody>
     </Table>
+    </div>
   );
 }
